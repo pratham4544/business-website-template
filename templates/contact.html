@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Modern Company - Contact Us{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <h1 class="mb-5 text-center">Contact Us</h1>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Send us a message</h4>
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Contact Information</h4>
+                        <div class="contact-info mb-4">
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Business Street, New York, NY 10001</p>
+                            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                            <p><i class="fas fa-envelope"></i> info@moderncompany.com</p>
+                            <p><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</p>
+                        </div>
+                        <h5>Follow Us</h5>
+                        <div class="social-icons">
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="btn btn-outline-primary"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

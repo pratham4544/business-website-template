@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Modern Company - Services{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <h1 class="mb-5 text-center">Our Services</h1>
+        
+        <div class="row mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Web Development</h4>
+                        <p class="card-text">We build responsive, high-performance websites and web applications tailored to your specific requirements.</p>
+                        <ul class="list-unstyled text-start">
+                            <li><i class="fas fa-check text-success me-2"></i> Responsive Design</li>
+                            <li><i class="fas fa-check text-success me-2"></i> E-commerce Solutions</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Content Management Systems</li>
+                            <li><i class="fas fa-check text-success me-2"></i> API Development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Mobile Apps</h4>
+                        <p class="card-text">Our team develops intuitive and powerful mobile applications for iOS and Android platforms.</p>
+                        <ul class="list-unstyled text-start">
+                            <li><i class="fas fa-check text-success me-2"></i> Native iOS & Android</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Cross-platform Solutions</li>
+                            <li><i class="fas fa-check text-success me-2"></i> App Store Optimization</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Maintenance & Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Digital Marketing</h4>
+                        <p class="card-text">Boost your online presence with our comprehensive digital marketing solutions and SEO strategies.</p>
+                        <ul class="list-unstyled text-start">
+                            <li><i class="fas fa-check text-success me-2"></i> Search Engine Optimization</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Social Media Marketing</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Content Marketing</li>
+                            <li><i class="fas fa-check text-success me-2"></i> Email Campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">Get a Free Quote</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

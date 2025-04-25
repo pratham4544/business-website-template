@@ -1,0 +1,94 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 60px;
+}
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/hero-bg.jpg') center/cover no-repeat;
+    color: white;
+    height: 100vh;
+    min-height: 500px;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+#hero h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 1rem;
+}
+
+/* Feature Icons */
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+}
+
+/* Testimonials */
+.testimonial-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+/* Call to Action Section */
+#cta {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+}
+
+/* Portfolio Images */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* About Page */
+.team-member-img {
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Services Page */
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #0d6efd;
+}
+
+/* Contact Form */
+.contact-info i {
+    width: 1.5rem;
+    text-align: center;
+    margin-right: 0.5rem;
+    color: #0d6efd;
+}
+
+/* Animation */
+.animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    #hero h2 {
+        font-size: 1.2rem;
+    }
+}
