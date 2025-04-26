@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog | TechnoIT</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    /* Blog Page Specific Styles */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .blog-card {
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blog-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .blog-card:hover .blog-image img {
+      transform: scale(1.1);
+    }
+    
+    .blog-category {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #025ADD;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .blog-content {
+      padding: 25px;
+    }
+    
+    .blog-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .blog-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .blog-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #222;
+      line-height: 1.4;
+    }
+    
+    .blog-excerpt {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .blog-read-more {
+      color: #025ADD;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .blog-read-more i {
+      transition: transform 0.3s ease;
+    }
+    
+    .blog-read-more:hover i {
+      transform: translateX(5px);
+    }
+    
+    /* Blog Sidebar */
+    .blog-container {
+      display: flex;
+      gap: 40px;
+    }
+    
+    .blog-main {
+      flex: 2;
+    }
+    
+    .blog-sidebar {
+      flex: 1;
+    }
+    
+    .sidebar-widget {
+      background: white;
+      border-radius: 5px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .widget-title {
+      font-size: 18px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      position: relative;
+    }
+    
+    .widget-title:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 50px;
+      height: 2px;
+      background: #025ADD;
+    }
+    
+    .search-form {
+      display: flex;
+    }
+    
+    .search-form input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #eee;
+      border-radius: 5px 0 0 5px;
+      font-size: 14px;
+    }
+    
+    .search-form button {
+      background: #025ADD;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      padding: 0 15px;
+      cursor: pointer;
+    }
+    
+    .category-list, .recent-posts, .tags {
+      list-style: none;
+    }
+    
+    .category-list li, .recent-posts li {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #f5f5f5;
+      padding-bottom: 15px;
+    }
+    
+    .category-list li:last-child, .recent-posts li:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .category-list a {
+      color: #666;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .category-list a:hover {
+      color: #025ADD;
+    }
+    
+    .recent-post-item {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .recent-post-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .recent-post-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .recent-post-info h5 {
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .recent-post-info h5 a {
+      color: #222;
+    }
+    
+    .recent-post-info h5 a:hover {
+      color: #025ADD;
+    }
+    
+    .recent-post-date {
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .tags li a {
+      display: inline-block;
+      padding: 5px 15px;
+      background: #f5f5f5;
+      color: #666;
+      border-radius: 3px;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+    
+    .tags li a:hover {
+      background: #025ADD;
+      color: white;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      gap: 5px;
+    }
+    
+    .pagination a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: white;
+      color: #666;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .pagination a:hover, .pagination a.active {
+      background: #025ADD;
+      color: white;
+    }
+    
+    @media (max-width: 992px) {
+      .blog-container {
+        flex-direction: column;
+      }
+      
+      .blog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <img src="/assets/images/logo.png" alt="TechnoIT Logo" height="50">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/portfolio.html">Portfolio</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="/blog.html" class="active">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1 data-aos="fade-up">Our Blog</h1>
+    <div class="breadcrumbs" data-aos="fade-up" data-aos-delay="100">
+      <a href="/index.html">Home</a> / <span>Blog</span>
+    </div>
+  </div>
+</section>
+
+<section class="blog-section">
+  <div class="container">
+    <div class="blog-container">
+      <div class="blog-main">
+        <div class="blog-grid">
+          <!-- Blog Post 1 -->
+          <div class="blog-card" data-aos="fade-up">
+            <div class="blog-image">
+              <img src="/assets/images/services-1.jpg" alt="Blog Post">
+              <div class="blog-category">Technology</div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> Jan 20, 2023</span>
+                <span><i class="far fa-user"></i> Admin</span>
+                <span><i class="far fa-comments"></i> 3</span>
+              </div>
+              <h3 class="blog-title">The Future of AI in Business Applications</h3>
+              <p class="blog-excerpt">Artificial intelligence is reshaping how businesses operate, from customer service to data analysis. Discover the latest trends and applications.</p>
+              <a href="/blog-details.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <!-- Blog Post 2 -->
+          <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-image">
+              <img src="/assets/images/services-2.jpg" alt="Blog Post">
+              <div class="blog-category">Cybersecurity</div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> Jan 15, 2023</span>
+                <span><i class="far fa-user"></i> Admin</span>
+                <span><i class="far fa-comments"></i> 5</span>
+              </div>
+              <h3 class="blog-title">Essential Cybersecurity Practices for Small Businesses</h3>
+              <p class="blog-excerpt">Small businesses are increasingly becoming targets for cyber attacks. Learn how to protect your business with these essential security practices.</p>
+              <a href="/blog-details.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <!-- Blog Post 3 -->
+          <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="blog-image">
+              <img src="/assets/images/services-3.jpg" alt="Blog Post">
+              <div class="blog-category">Cloud Computing</div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> Jan 10, 2023</span>
+                <span><i class="far fa-user"></i> Admin</span>
+                <span><i class="far fa-comments"></i> 2</span>
+              </div>
+              <h3 class="blog-title">Navigating the Cloud: Choosing the Right Solution</h3>
+              <p class="blog-excerpt">With numerous cloud service providers on the market, choosing the right solution can be overwhelming. We break down the key considerations.</p>
+              <a href="/blog-details.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <!-- Blog Post 4 -->
+          <div class="blog-card" data-aos="fade-up">
+            <div class="blog-image">
+              <img src="/assets/images/services-4.jpg" alt="Blog Post">
+              <div class="blog-category">Data Analytics</div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> Jan 5, 2023</span>
+                <span><i class="far fa-user"></i> Admin</span>
+                <span><i class="far fa-comments"></i> 4</span>
+              </div>
+              <h3 class="blog-title">Leveraging Big Data for Business Growth</h3>
+              <p class="blog-excerpt">Big data is no longer just for large corporations. Learn how businesses of all sizes can use data analytics to drive growth and innovation.</p>
+              <a href="/blog-details.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <!-- Blog Post 5 -->
+          <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-image">
+              <img src="/assets/images/services-1.jpg" alt="Blog Post">
+              <div class="blog-category">Web Development</div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> Dec 28, 2022</span>
+                <span><i class="far fa-user"></i> Admin</span>
+                <span><i class="far fa-comments"></i> 7</span>
+              </div>
+              <h3 class="blog-title">Web Development Trends to Watch in 2023</h3>
+              <p class="blog-excerpt">The web development landscape is constantly evolving. Stay ahead of the curve with these emerging trends that will shape the industry in 2023.</p>
+              <a href="/blog-details.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <!-- Blog Post 6 -->
+          <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="blog-image">
+              <img src="/assets/images/services-2.jpg" alt="Blog Post">
+              <div class="blog-category">IT Strategy</div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> Dec 20, 2022</span>
+                <span><i class="far fa-user"></i> Admin</span>
+                <span><i class="far fa-comments"></i> 1</span>
+              </div>
+              <h3 class="blog-title">Building a Resilient IT Infrastructure</h3>
+              <p class="blog-excerpt">In today's digital world, a resilient IT infrastructure is crucial for business continuity. Discover strategies for building systems that can withstand disruptions.</p>
+              <a href="/blog-details.html" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#"><i class="fas fa-angle-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Blog Sidebar -->
+      <div class="blog-sidebar">
+        <!-- Search Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Search</h3>
+          <form class="search-form">
+            <input type="text" placeholder="Search...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        
+        <!-- Categories Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Categories</h3>
+          <ul class="category-list">
+            <li><a href="#">Technology <span>(10)</span></a></li>
+            <li><a href="#">Cybersecurity <span>(8)</span></a></li>
+            <li><a href="#">Cloud Computing <span>(7)</span></a></li>
+            <li><a href="#">Web Development <span>(12)</span></a></li>
+            <li><a href="#">Data Analytics <span>(5)</span></a></li>
+            <li><a href="#">IT Strategy <span>(3)</span></a></li>
+          </ul>
+        </div>
+        
+        <!-- Recent Posts Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Recent Posts</h3>
+          <ul class="recent-posts">
+            <li>
+              <div class="recent-post-item">
+                <div class="recent-post-img">
+                  <img src="/assets/images/services-3.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-info">
+                  <h5><a href="/blog-details.html">The Future of AI in Business Applications</a></h5>
+                  <span class="recent-post-date">Jan 20, 2023</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="recent-post-item">
+                <div class="recent-post-img">
+                  <img src="/assets/images/services-4.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-info">
+                  <h5><a href="/blog-details.html">Essential Cybersecurity Practices</a></h5>
+                  <span class="recent-post-date">Jan 15, 2023</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="recent-post-item">
+                <div class="recent-post-img">
+                  <img src="/assets/images/services-1.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-info">
+                  <h5><a href="/blog-details.html">Navigating the Cloud: Choosing the Right Solution</a></h5>
+                  <span class="recent-post-date">Jan 10, 2023</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Tags Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Tags</h3>
+          <ul class="tags">
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Cloud</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Data</a></li>
+            <li><a href="#">Web</a></li>
+            <li><a href="#">Innovation</a></li>
+            <li><a href="#">AI</a></li>
+            <li><a href="#">Strategy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-content" data-aos="zoom-in">
+      <h2>Ready to Start Your Next Project?</h2>
+      <p>Let's talk about how we can help your business grow with our technology solutions.</p>
+      <a href="/contact.html" class="btn btn-light">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="logo"><img src="/assets/images/logo.png" alt="TechnoIT Logo" height="40"></div>
+        <p>Providing innovative technology solutions to businesses worldwide.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services-details.html">Web Development</a></li>
+          <li><a href="/services-details.html">Mobile Development</a></li>
+          <li><a href="/services-details.html">Cloud Services</a></li>
+          <li><a href="/services-details.html">IT Consulting</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</li>
+          <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          <li><i class="fas fa-envelope"></i> info@technoit.com</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2023 TechnoIT. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease',
+    once: true
+  });
+</script>
+</body>
+</html>

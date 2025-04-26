@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog Details | TechnoIT</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    /* Blog Details Page Specific Styles */
+    .blog-details-section {
+      padding: 80px 0;
+    }
+    
+    .blog-details-container {
+      display: flex;
+      gap: 40px;
+    }
+    
+    .blog-content-main {
+      flex: 2;
+    }
+    
+    .blog-sidebar {
+      flex: 1;
+    }
+    
+    .blog-featured-image {
+      width: 100%;
+      height: 450px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    
+    .blog-featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .blog-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+    
+    .blog-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .blog-meta span i {
+      color: #025ADD;
+    }
+    
+    .blog-title {
+      font-size: 32px;
+      margin-bottom: 25px;
+      color: #222;
+      line-height: 1.3;
+    }
+    
+    .blog-content {
+      margin-bottom: 40px;
+    }
+    
+    .blog-content p {
+      margin-bottom: 20px;
+      color: #666;
+      line-height: 1.7;
+    }
+    
+    .blog-content h3 {
+      font-size: 24px;
+      margin: 30px 0 15px;
+      color: #222;
+    }
+    
+    .blog-content h4 {
+      font-size: 20px;
+      margin: 25px 0 15px;
+      color: #222;
+    }
+    
+    .blog-content ul, .blog-content ol {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    
+    .blog-content li {
+      margin-bottom: 10px;
+      color: #666;
+    }
+    
+    .blog-content blockquote {
+      padding: 25px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #025ADD;
+      margin: 30px 0;
+      font-style: italic;
+      color: #555;
+    }
+    
+    .blog-content img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin: 30px 0;
+    }
+    
+    /* Author Box */
+    .author-box {
+      display: flex;
+      gap: 25px;
+      padding: 30px;
+      background: #f9f9f9;
+      border-radius: 5px;
+      margin: 40px 0;
+    }
+    
+    .author-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .author-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+    
+    .author-info p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .author-social {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .author-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      background: white;
+      border-radius: 50%;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+    
+    .author-social a:hover {
+      background: #025ADD;
+      color: white;
+    }
+    
+    /* Tags */
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    
+    .post-tags a {
+      display: inline-block;
+      padding: 5px 15px;
+      background: #f5f5f5;
+      color: #666;
+      border-radius: 3px;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+    
+    .post-tags a:hover {
+      background: #025ADD;
+      color: white;
+    }
+    
+    /* Post Navigation */
+    .post-navigation {
+      display: flex;
+      justify-content: space-between;
+      padding: 30px 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      margin: 40px 0;
+    }
+    
+    .prev-post, .next-post {
+      max-width: 45%;
+    }
+    
+    .post-nav-label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+      color: #888;
+      text-transform: uppercase;
+    }
+    
+    .post-nav-title {
+      color: #222;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .post-navigation a:hover .post-nav-title {
+      color: #025ADD;
+    }
+    
+    /* Comments */
+    .comments-section {
+      margin-top: 50px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #222;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: #025ADD;
+    }
+    
+    .comment {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .comment:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .comment-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .comment-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .comment-content {
+      flex: 1;
+    }
+    
+    .comment-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .comment-author {
+      font-weight: 600;
+      color: #222;
+    }
+    
+    .comment-date {
+      color: #888;
+      font-size: 14px;
+    }
+    
+    .comment-text {
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    
+    .comment-reply {
+      color: #025ADD;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .comment-reply i {
+      margin-right: 5px;
+    }
+    
+    .comment-reply:hover {
+      text-decoration: underline;
+    }
+    
+    .comment-form {
+      margin-top: 50px;
+    }
+    
+    .form-row {
+      margin-bottom: 20px;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: #025ADD;
+      outline: none;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    .btn-submit {
+      background: #025ADD;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+      background: #024dcc;
+      transform: translateY(-3px);
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .blog-details-container {
+        flex-direction: column;
+      }
+      
+      .blog-featured-image {
+        height: 350px;
+      }
+      
+      .blog-title {
+        font-size: 28px;
+      }
+      
+      .author-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .author-social {
+        justify-content: center;
+      }
+      
+      .post-navigation {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .prev-post, .next-post {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .blog-featured-image {
+        height: 250px;
+      }
+      
+      .blog-title {
+        font-size: 24px;
+      }
+      
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .comment {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .comment-meta {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <img src="/assets/images/logo.png" alt="TechnoIT Logo" height="50">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/portfolio.html">Portfolio</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="/blog.html" class="active">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1 data-aos="fade-up">Blog Details</h1>
+    <div class="breadcrumbs" data-aos="fade-up" data-aos-delay="100">
+      <a href="/index.html">Home</a> / <a href="/blog.html">Blog</a> / <span>Blog Details</span>
+    </div>
+  </div>
+</section>
+
+<section class="blog-details-section">
+  <div class="container">
+    <div class="blog-details-container">
+      <div class="blog-content-main">
+        <!-- Featured Image -->
+        <div class="blog-featured-image" data-aos="fade-up">
+          <img src="/assets/images/services-1.jpg" alt="Blog Featured Image">
+        </div>
+        
+        <!-- Blog Meta -->
+        <div class="blog-meta" data-aos="fade-up">
+          <span><i class="far fa-calendar"></i> January 20, 2023</span>
+          <span><i class="far fa-user"></i> By Admin</span>
+          <span><i class="far fa-folder"></i> Technology</span>
+          <span><i class="far fa-comments"></i> 3 Comments</span>
+        </div>
+        
+        <!-- Blog Title -->
+        <h2 class="blog-title" data-aos="fade-up">The Future of AI in Business Applications: Trends and Opportunities</h2>
+        
+        <!-- Blog Content -->
+        <div class="blog-content" data-aos="fade-up">
+          <p>Artificial intelligence (AI) is no longer a futuristic concept but a present-day reality that is reshaping how businesses operate. From automating routine tasks to providing deep insights from complex data, AI is becoming an indispensable tool for companies looking to stay competitive in the digital age.</p>
+          
+          <p>The integration of AI into business applications has accelerated significantly in recent years, driven by advances in machine learning, natural language processing, and computer vision. This trend shows no signs of slowing down, with analysts predicting that the global AI market will grow to over $500 billion by 2027.</p>
+          
+          <h3>Key AI Trends in Business Applications</h3>
+          
+          <h4>1. Conversational AI</h4>
+          <p>Chatbots and virtual assistants have evolved from simple rule-based systems to sophisticated conversational agents capable of understanding context, sentiment, and intent. Businesses are leveraging these technologies to provide 24/7 customer support, streamline sales processes, and even assist employees with internal tasks.</p>
+          
+          <h4>2. Predictive Analytics</h4>
+          <p>AI-powered predictive analytics is enabling businesses to anticipate customer needs, forecast demand, and identify potential issues before they occur. By analyzing historical data and identifying patterns, predictive models can provide valuable insights that inform decision-making across departments, from marketing to supply chain management.</p>
+          
+          <blockquote>
+            "AI is not just about automation; it's about augmentation. It's about enhancing human capabilities rather than replacing them, and businesses that understand this distinction will be the ones to thrive in the AI era."
+          </blockquote>
+          
+          <h4>3. Computer Vision Applications</h4>
+          <p>Computer vision technology is being applied across industries for quality control, security, inventory management, and more. Retailers are using it for cashierless checkout systems, manufacturers for defect detection, and healthcare providers for medical imaging analysis.</p>
+          
+          <p>The adoption of AI in business applications brings both opportunities and challenges. While the potential benefits are substantial, companies must navigate concerns related to data privacy, algorithm bias, and workforce impacts. A strategic approach to AI implementation, with a focus on ethical considerations and human-AI collaboration, will be key to realizing the full potential of these technologies.</p>
+          
+          <h3>Getting Started with AI in Your Business</h3>
+          <p>For businesses looking to incorporate AI into their operations, a phased approach is often most effective:</p>
+          
+          <ol>
+            <li><strong>Identify specific business problems</strong> that AI could help solve. Focus on areas where AI can provide the most value.</li>
+            <li><strong>Evaluate available data</strong>. AI systems require quality data to deliver accurate results. Assess what data you have and what you might need to collect.</li>
+            <li><strong>Start with pilot projects</strong> to demonstrate value and learn from the implementation process.</li>
+            <li><strong>Build AI literacy within your organization</strong>. Ensure that employees understand how AI works and how it can support their roles.</li>
+            <li><strong>Develop a long-term AI strategy</strong> that aligns with your business goals and includes considerations for scaling successful pilot projects.</li>
+          </ol>
+          
+          <p>As AI technology continues to evolve, staying informed about emerging trends and best practices will be essential for businesses looking to leverage these tools effectively. By approaching AI adoption with a clear strategy and a commitment to continuous learning, organizations can position themselves to benefit from the transformative potential of AI in business applications.</p>
+        </div>
+        
+        <!-- Tags -->
+        <div class="post-tags" data-aos="fade-up">
+          <a href="#">Technology</a>
+          <a href="#">Artificial Intelligence</a>
+          <a href="#">Business</a>
+          <a href="#">Innovation</a>
+          <a href="#">Digital Transformation</a>
+        </div>
+        
+        <!-- Author Box -->
+        <div class="author-box" data-aos="fade-up">
+          <div class="author-image">
+            <img src="/assets/images/client-1.svg" alt="Author">
+          </div>
+          <div class="author-info">
+            <h4>John Doe</h4>
+            <p>John is a technology writer and consultant with over 10 years of experience in the IT industry. He specializes in emerging technologies and their applications in business settings.</p>
+            <div class="author-social">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Post Navigation -->
+        <div class="post-navigation" data-aos="fade-up">
+          <div class="prev-post">
+            <a href="#">
+              <span class="post-nav-label"><i class="fas fa-arrow-left"></i> Previous Post</span>
+              <span class="post-nav-title">Web Development Trends to Watch in 2023</span>
+            </a>
+          </div>
+          <div class="next-post">
+            <a href="#">
+              <span class="post-nav-label">Next Post <i class="fas fa-arrow-right"></i></span>
+              <span class="post-nav-title">Essential Cybersecurity Practices for Small Businesses</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Comments Section -->
+        <div class="comments-section" data-aos="fade-up">
+          <h3 class="section-title">3 Comments</h3>
+          
+          <div class="comments-list">
+            <!-- Comment 1 -->
+            <div class="comment">
+              <div class="comment-avatar">
+                <img src="/assets/images/client-1.svg" alt="Commenter">
+              </div>
+              <div class="comment-content">
+                <div class="comment-meta">
+                  <span class="comment-author">Michael Johnson</span>
+                  <span class="comment-date">January 22, 2023</span>
+                </div>
+                <p class="comment-text">This is a fantastic article that really highlights the potential of AI in business applications. I especially appreciated the section on predictive analytics, as this is an area where we've seen tremendous value in our own organization.</p>
+                <a href="#" class="comment-reply"><i class="fas fa-reply"></i> Reply</a>
+              </div>
+            </div>
+            
+            <!-- Comment 2 -->
+            <div class="comment">
+              <div class="comment-avatar">
+                <img src="/assets/images/client-1.svg" alt="Commenter">
+              </div>
+              <div class="comment-content">
+                <div class="comment-meta">
+                  <span class="comment-author">Sarah Thompson</span>
+                  <span class="comment-date">January 23, 2023</span>
+                </div>
+                <p class="comment-text">I would add that ethical considerations are becoming increasingly important as AI adoption grows. Businesses need to be mindful of potential biases in their AI systems and take steps to ensure transparency in how these systems make decisions.</p>
+                <a href="#" class="comment-reply"><i class="fas fa-reply"></i> Reply</a>
+              </div>
+            </div>
+            
+            <!-- Comment 3 -->
+            <div class="comment">
+              <div class="comment-avatar">
+                <img src="/assets/images/client-1.svg" alt="Commenter">
+              </div>
+              <div class="comment-content">
+                <div class="comment-meta">
+                  <span class="comment-author">David Wilson</span>
+                  <span class="comment-date">January 25, 2023</span>
+                </div>
+                <p class="comment-text">The phased approach to AI implementation that you've outlined is spot on. We've found that starting with well-defined pilot projects has been the key to success in our AI initiatives. It allows for learning and adjustment before scaling up.</p>
+                <a href="#" class="comment-reply"><i class="fas fa-reply"></i> Reply</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Comment Form -->
+        <div class="comment-form" data-aos="fade-up">
+          <h3 class="section-title">Leave a Comment</h3>
+          <form>
+            <div class="form-grid">
+              <div class="form-row">
+                <input type="text" class="form-control" placeholder="Your Name *" required>
+              </div>
+              <div class="form-row">
+                <input type="email" class="form-control" placeholder="Your Email *" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <input type="text" class="form-control" placeholder="Website">
+            </div>
+            <div class="form-row">
+              <textarea class="form-control" rows="5" placeholder="Your Comment *" required></textarea>
+            </div>
+            <div class="form-row">
+              <button type="submit" class="btn-submit">Post Comment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Blog Sidebar -->
+      <div class="blog-sidebar">
+        <!-- Search Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Search</h3>
+          <form class="search-form">
+            <input type="text" placeholder="Search...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        
+        <!-- Categories Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Categories</h3>
+          <ul class="category-list">
+            <li><a href="#">Technology <span>(10)</span></a></li>
+            <li><a href="#">Cybersecurity <span>(8)</span></a></li>
+            <li><a href="#">Cloud Computing <span>(7)</span></a></li>
+            <li><a href="#">Web Development <span>(12)</span></a></li>
+            <li><a href="#">Data Analytics <span>(5)</span></a></li>
+            <li><a href="#">IT Strategy <span>(3)</span></a></li>
+          </ul>
+        </div>
+        
+        <!-- Recent Posts Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Recent Posts</h3>
+          <ul class="recent-posts">
+            <li>
+              <div class="recent-post-item">
+                <div class="recent-post-img">
+                  <img src="/assets/images/services-2.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-info">
+                  <h5><a href="#">Essential Cybersecurity Practices</a></h5>
+                  <span class="recent-post-date">Jan 15, 2023</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="recent-post-item">
+                <div class="recent-post-img">
+                  <img src="/assets/images/services-3.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-info">
+                  <h5><a href="#">Navigating the Cloud: Choosing the Right Solution</a></h5>
+                  <span class="recent-post-date">Jan 10, 2023</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="recent-post-item">
+                <div class="recent-post-img">
+                  <img src="/assets/images/services-4.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-info">
+                  <h5><a href="#">Leveraging Big Data for Business Growth</a></h5>
+                  <span class="recent-post-date">Jan 5, 2023</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Tags Widget -->
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h3 class="widget-title">Tags</h3>
+          <ul class="tags">
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Cloud</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Data</a></li>
+            <li><a href="#">Web</a></li>
+            <li><a href="#">Innovation</a></li>
+            <li><a href="#">AI</a></li>
+            <li><a href="#">Strategy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-content" data-aos="zoom-in">
+      <h2>Ready to Start Your Next Project?</h2>
+      <p>Let's talk about how we can help your business grow with our technology solutions.</p>
+      <a href="/contact.html" class="btn btn-light">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="logo"><img src="/assets/images/logo.png" alt="TechnoIT Logo" height="40"></div>
+        <p>Providing innovative technology solutions to businesses worldwide.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services-details.html">Web Development</a></li>
+          <li><a href="/services-details.html">Mobile Development</a></li>
+          <li><a href="/services-details.html">Cloud Services</a></li>
+          <li><a href="/services-details.html">IT Consulting</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</li>
+          <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          <li><i class="fas fa-envelope"></i> info@technoit.com</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2023 TechnoIT. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease',
+    once: true
+  });
+</script>
+</body>
+</html>

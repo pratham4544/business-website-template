@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Solutions | TechnoIT</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    /* Service Details Page Specific Styles */
+    .service-details {
+      display: grid;
+      grid-template-columns: 7fr 3fr;
+      gap: 40px;
+    }
+    
+    .service-image {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+    
+    .service-image:hover img {
+      transform: scale(1.03);
+    }
+    
+    .service-content h2 {
+      font-size: 36px;
+      color: #222;
+      margin-bottom: 25px;
+    }
+    
+    .service-content p {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+    
+    .features-list {
+      margin: 30px 0;
+    }
+    
+    .feature-item {
+      display: flex;
+      margin-bottom: 25px;
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #f0f5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 25px;
+      flex-shrink: 0;
+      color: #025ADD;
+      font-size: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover .feature-icon {
+      background: #025ADD;
+      color: white;
+    }
+    
+    .feature-info h4 {
+      font-size: 20px;
+      color: #222;
+      margin-bottom: 10px;
+    }
+    
+    .feature-info p {
+      color: #666;
+      margin-bottom: 0;
+    }
+    
+    .process-flow {
+      margin: 50px 0;
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    
+    .process-step {
+      text-align: center;
+      position: relative;
+    }
+    
+    .process-step:not(:last-child):after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      right: -15px;
+      width: 30px;
+      height: 2px;
+      background: #ddd;
+    }
+    
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: #f0f5ff;
+      color: #025ADD;
+      font-size: 24px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .process-step:hover .step-number {
+      background: #025ADD;
+      color: white;
+    }
+    
+    .step-title {
+      font-size: 18px;
+      color: #222;
+      margin-bottom: 15px;
+    }
+    
+    .step-desc {
+      font-size: 15px;
+      color: #666;
+    }
+    
+    .cta-box {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    .cta-box h3 {
+      font-size: 24px;
+      color: #222;
+      margin-bottom: 20px;
+    }
+    
+    .service-sidebar {
+      position: sticky;
+      top: 100px;
+    }
+    
+    .sidebar-widget {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .widget-title {
+      font-size: 20px;
+      color: #222;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .service-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .service-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .service-list li a {
+      color: #666;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .service-list li a i {
+      margin-right: 10px;
+      color: #025ADD;
+      font-size: 12px;
+    }
+    
+    .service-list li a:hover, .service-list li a.active {
+      color: #025ADD;
+      padding-left: 5px;
+    }
+    
+    .download-brochure {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      background: #f0f5ff;
+      border-radius: 5px;
+      color: #025ADD;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .download-brochure i {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+    
+    .download-brochure:hover {
+      background: #025ADD;
+      color: white;
+    }
+    
+    .testimonial-widget {
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    .widget-testimonial {
+      padding: 30px;
+      background: linear-gradient(135deg, #025ADD, #0085FF);
+      color: white;
+    }
+    
+    .testimonial-content {
+      font-style: italic;
+      margin-bottom: 20px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .testimonial-content:before {
+      content: '\f10d';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 20px;
+      opacity: 0.3;
+    }
+    
+    .client-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .client-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+    
+    .client-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .client-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .client-position {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    
+    .technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .tech-icon {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #025ADD;
+      transition: all 0.3s ease;
+    }
+    
+    .tech-icon:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 992px) {
+      .service-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .process-step:nth-child(2):after {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-step:after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <img src="/assets/images/logo.png" alt="TechnoIT Logo" height="50">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/services.html" class="active">Services</a></li>
+        <li><a href="/portfolio.html">Portfolio</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1 data-aos="fade-up">Cloud Solutions</h1>
+    <div class="breadcrumbs" data-aos="fade-up" data-aos-delay="100">
+      <a href="/index.html">Home</a> / <a href="/services.html">Services</a> / <span>Cloud Solutions</span>
+    </div>
+  </div>
+</section>
+
+<section class="service-details-section">
+  <div class="container">
+    <div class="service-details">
+      <div class="service-main-content">
+        <div class="service-image" data-aos="fade-up">
+          <img src="/assets/images/services-3.svg" alt="Cloud Solutions" class="img-fluid">
+        </div>
+        
+        <div class="service-content" data-aos="fade-up">
+          <h2>Cloud Solutions & Data Storage Services</h2>
+          <p>
+            Our comprehensive cloud solutions help businesses leverage the power of cloud technology to scale operations, reduce infrastructure costs, and enhance data security. We provide end-to-end cloud services that transform how your business manages its IT infrastructure and data storage needs.
+          </p>
+          <p>
+            We use the latest technologies and follow best practices to ensure that your cloud solution is not only visually appealing but also fast, secure, and scalable. Our development process is collaborative, transparent, and focused on delivering results that align with your business objectives.
+          </p>
+          
+          <div class="features-list" data-aos="fade-up">
+            <h3>Key Features</h3>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+              </div>
+              <div class="feature-info">
+                <h4>Cloud Migration</h4>
+                <p>Seamlessly transition your existing infrastructure to the cloud with minimal disruption to your business operations.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-server"></i>
+              </div>
+              <div class="feature-info">
+                <h4>Infrastructure as a Service (IaaS)</h4>
+                <p>Access scalable computing resources on-demand without having to invest in physical hardware.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <div class="feature-info">
+                <h4>Platform as a Service (PaaS)</h4>
+                <p>Develop, run, and manage applications without the complexity of building and maintaining infrastructure.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-database"></i>
+              </div>
+              <div class="feature-info">
+                <h4>Data Storage Solutions</h4>
+                <p>Secure, scalable, and reliable storage solutions for all your business data with easy access and management.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-sync-alt"></i>
+              </div>
+              <div class="feature-info">
+                <h4>Disaster Recovery</h4>
+                <p>Protect your business with robust disaster recovery solutions that ensure business continuity during unforeseen events.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="feature-info">
+                <h4>Cloud Security</h4>
+                <p>Comprehensive security measures to protect your cloud infrastructure and data from emerging threats.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section" data-aos="fade-up">
+            <h3>Benefits of Our Cloud Solutions</h3>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <h4>Cost Efficiency</h4>
+                  <p>Reduce capital expenditure and operational costs by paying only for the resources you use.</p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <h4>Scalability</h4>
+                  <p>Easily scale resources up or down based on your business needs without significant investments.</p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <h4>Flexibility</h4>
+                  <p>Access your applications and data from anywhere, enabling remote work and collaboration.</p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <h4>Enhanced Security</h4>
+                  <p>Benefit from enterprise-grade security features and regular updates to protect against threats.</p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <div>
+                  <h4>Business Continuity</h4>
+                  <p>Ensure your operations continue even during disasters with reliable backup and recovery options.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="process-section" data-aos="fade-up">
+            <h3>Our Cloud Implementation Process</h3>
+            <div class="process-timeline">
+              <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                  <h4>Assessment & Strategy</h4>
+                  <p>We evaluate your current infrastructure and design a cloud strategy aligned with your business objectives.</p>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                  <h4>Planning & Design</h4>
+                  <p>Our experts create a detailed roadmap for cloud migration or implementation with architecture designs.</p>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                  <h4>Migration & Implementation</h4>
+                  <p>We execute the migration with minimal disruption, ensuring data integrity and business continuity.</p>
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                  <h4>Optimization & Support</h4>
+                  <p>Continuous monitoring and optimization of your cloud environment with 24/7 technical support.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div data-aos="fade-up">
+            <h3>Technologies We Use</h3>
+            <p>
+              We stay up-to-date with the latest cloud technologies and frameworks to provide you with cutting-edge solutions. Our tech stack includes:
+            </p>
+            
+            <div class="technologies">
+              <div class="tech-icon">
+                <i class="fab fa-aws"></i>
+              </div>
+              <div class="tech-icon">
+                <i class="fab fa-azure"></i>
+              </div>
+              <div class="tech-icon">
+                <i class="fab fa-google-cloud"></i>
+              </div>
+              <div class="tech-icon">
+                <i class="fab fa-microsoft-azure"></i>
+              </div>
+              <div class="tech-icon">
+                <i class="fab fa-oracle"></i>
+              </div>
+              <div class="tech-icon">
+                <i class="fab fa-vmware"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="cta-box" data-aos="fade-up">
+            <h3>Ready to Transform Your Business with Our Cloud Solutions?</h3>
+            <p>Our cloud experts are ready to help you harness the power of cloud technology for your business growth.</p>
+            <a href="/contact.html" class="btn btn-primary">Get Started Today</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="service-sidebar">
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h4 class="widget-title">Our Services</h4>
+          <ul class="service-list">
+            <li><a href="/services-details.html"><i class="fas fa-angle-right"></i> Web Development</a></li>
+            <li><a href="/services-details.html"><i class="fas fa-angle-right"></i> Mobile App Development</a></li>
+            <li class="active"><a href="/services-details.html"><i class="fas fa-angle-right"></i> Cloud Solutions</a></li>
+            <li><a href="/services-details.html"><i class="fas fa-angle-right"></i> Data Analytics</a></li>
+            <li><a href="/services-details.html"><i class="fas fa-angle-right"></i> Cybersecurity</a></li>
+            <li><a href="/services-details.html"><i class="fas fa-angle-right"></i> IT Consulting</a></li>
+          </ul>
+          
+          <a href="#" class="download-brochure">
+            <i class="fas fa-file-pdf"></i>
+            <span>Download Service Brochure</span>
+          </a>
+        </div>
+        
+        <div class="sidebar-widget testimonial-widget" data-aos="fade-left">
+          <div class="widget-testimonial">
+            <div class="testimonial-content">
+              TechnoIT transformed our outdated website into a modern, high-converting platform. Their web development expertise significantly improved our online presence and customer engagement.
+            </div>
+            <div class="client-info">
+              <div class="client-avatar">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Client Avatar">
+              </div>
+              <div>
+                <div class="client-name">Sarah Johnson</div>
+                <div class="client-position">Marketing Director, Global Solutions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-widget" data-aos="fade-left">
+          <h4 class="widget-title">Have Questions?</h4>
+          <p>Our technical consultants are ready to answer any questions about our cloud solutions.</p>
+          <a href="/contact.html" class="btn btn-primary btn-block">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="related-services">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 data-aos="fade-up">Related Services</h2>
+      <p data-aos="fade-up" data-aos-delay="100">Explore other services that complement our cloud solutions</p>
+    </div>
+    
+    <div class="services-grid">
+      <div class="service-card" data-aos="fade-up">
+        <div class="service-icon">
+          <img src="/assets/images/services-2.jpg" alt="Mobile App Development" height="100">
+        </div>
+        <h3>Mobile App Development</h3>
+        <p>Native and cross-platform mobile applications for iOS and Android.</p>
+        <a href="/services-details.html" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-icon">
+          <img src="/assets/images/services-3.jpg" alt="Cloud Solutions" height="100">
+        </div>
+        <h3>Cloud Solutions</h3>
+        <p>Secure, scalable cloud infrastructure and migration services.</p>
+        <a href="/services-details.html" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-icon">
+          <i class="fas fa-paint-brush"></i>
+        </div>
+        <h3>UI/UX Design</h3>
+        <p>User-centered design solutions that enhance user experience.</p>
+        <a href="/services-details.html" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="logo"><img src="/assets/images/logo.png" alt="TechnoIT Logo" height="40"></div>
+        <p>Providing innovative technology solutions to businesses worldwide.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services-details.html">Web Development</a></li>
+          <li><a href="/services-details.html">Mobile Development</a></li>
+          <li><a href="/services-details.html">Cloud Services</a></li>
+          <li><a href="/services-details.html">IT Consulting</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</li>
+          <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          <li><i class="fas fa-envelope"></i> info@technoit.com</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2023 TechnoIT. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease',
+    once: true
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio | TechnoIT</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    /* Portfolio Page Specific Styles */
+    .portfolio-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      gap: 10px;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      background: white;
+      border: none;
+      border-radius: 5px;
+      color: #333;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: #025ADD;
+      color: white;
+    }
+    
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .portfolio-item {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .portfolio-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .portfolio-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .portfolio-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .portfolio-item:hover .portfolio-image img {
+      transform: scale(1.1);
+    }
+    
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 90, 221, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+    
+    .portfolio-icon {
+      background: white;
+      color: #025ADD;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .portfolio-icon:hover {
+      background: #025ADD;
+      color: white;
+    }
+    
+    .portfolio-content {
+      background: white;
+      padding: 25px;
+    }
+    
+    .portfolio-category {
+      color: #025ADD;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    
+    .portfolio-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #222;
+      transition: color 0.3s ease;
+    }
+    
+    .portfolio-item:hover .portfolio-title {
+      color: #025ADD;
+    }
+    
+    .portfolio-description {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #025ADD;
+      font-weight: 500;
+    }
+    
+    .portfolio-link i {
+      transition: transform 0.3s ease;
+    }
+    
+    .portfolio-link:hover i {
+      transform: translateX(5px);
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      gap: 5px;
+    }
+    
+    .pagination a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: white;
+      color: #666;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .pagination a:hover, .pagination a.active {
+      background: #025ADD;
+      color: white;
+    }
+    
+    @media (max-width: 992px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .portfolio-filters {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <img src="/assets/images/logo.png" alt="TechnoIT Logo" height="50">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1 data-aos="fade-up">Our Portfolio</h1>
+    <div class="breadcrumbs" data-aos="fade-up" data-aos-delay="100">
+      <a href="/index.html">Home</a> / <span>Portfolio</span>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio-section">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <span class="subtitle">Our Recent Work</span>
+      <h2 class="title">Check Our Portfolio</h2>
+      <p class="description">Browse through our diverse range of projects spanning web development, mobile applications, and enterprise solutions.</p>
+    </div>
+    
+    <div class="portfolio-filters" data-aos="fade-up">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web Development</button>
+      <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+      <button class="filter-btn" data-filter="ui">UI/UX Design</button>
+      <button class="filter-btn" data-filter="enterprise">Enterprise Solutions</button>
+    </div>
+    
+    <div class="portfolio-grid" data-aos="fade-up">
+      <!-- Portfolio Item 1 -->
+      <div class="portfolio-item" data-category="web">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="E-commerce Website">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Web Development</div>
+          <h3 class="portfolio-title">E-commerce Platform Redesign</h3>
+          <p class="portfolio-description">A complete overhaul of an existing e-commerce platform with focus on user experience and conversion optimization.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 2 -->
+      <div class="portfolio-item" data-category="mobile">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="Mobile App">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Mobile Apps</div>
+          <h3 class="portfolio-title">Fitness Tracking Application</h3>
+          <p class="portfolio-description">A mobile application for tracking fitness goals, with social features and personalized workout recommendations.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 3 -->
+      <div class="portfolio-item" data-category="ui">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="UI/UX Design">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">UI/UX Design</div>
+          <h3 class="portfolio-title">Financial Dashboard Redesign</h3>
+          <p class="portfolio-description">A redesign of a complex financial dashboard, simplifying the interface while providing more insightful data visualization.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 4 -->
+      <div class="portfolio-item" data-category="enterprise">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="Enterprise Solution">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Enterprise Solutions</div>
+          <h3 class="portfolio-title">Inventory Management System</h3>
+          <p class="portfolio-description">A comprehensive inventory management system for a large-scale manufacturing company, integrating with existing ERP systems.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 5 -->
+      <div class="portfolio-item" data-category="web">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="Web Application">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Web Development</div>
+          <h3 class="portfolio-title">Real Estate Listing Platform</h3>
+          <p class="portfolio-description">A modern real estate platform with advanced search capabilities, virtual tours, and integrated CRM for agents.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 6 -->
+      <div class="portfolio-item" data-category="mobile">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="Mobile App">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Mobile Apps</div>
+          <h3 class="portfolio-title">Food Delivery Application</h3>
+          <p class="portfolio-description">A comprehensive food delivery application with real-time tracking, in-app payments, and restaurant management dashboard.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 7 -->
+      <div class="portfolio-item" data-category="ui">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="UI/UX Design">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">UI/UX Design</div>
+          <h3 class="portfolio-title">Healthcare Patient Portal</h3>
+          <p class="portfolio-description">A user-friendly patient portal for a healthcare provider, focusing on accessibility and clear information hierarchy.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 8 -->
+      <div class="portfolio-item" data-category="enterprise">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="Enterprise Solution">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Enterprise Solutions</div>
+          <h3 class="portfolio-title">HR Management Suite</h3>
+          <p class="portfolio-description">A comprehensive HR solution including recruitment, performance management, and employee self-service modules.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 9 -->
+      <div class="portfolio-item" data-category="web">
+        <div class="portfolio-image">
+          <img src="/assets/images/portfolio-1.svg" alt="Web Application">
+          <div class="portfolio-overlay">
+            <a href="/portfolio-details.html" class="portfolio-icon">
+              <i class="fas fa-link"></i>
+            </a>
+            <a href="/assets/images/portfolio-1.svg" class="portfolio-icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-content">
+          <div class="portfolio-category">Web Development</div>
+          <h3 class="portfolio-title">Educational Learning Platform</h3>
+          <p class="portfolio-description">An interactive e-learning platform with course creation tools, student progress tracking, and integrated assessment features.</p>
+          <a href="/portfolio-details.html" class="portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination" data-aos="fade-up">
+      <a href="#" class="active">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#"><i class="fas fa-angle-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-content" data-aos="zoom-in">
+      <h2>Ready to Start Your Next Project?</h2>
+      <p>Let's talk about how we can help your business grow with our technology solutions.</p>
+      <a href="/contact.html" class="btn btn-light">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="logo"><img src="/assets/images/logo.png" alt="TechnoIT Logo" height="40"></div>
+        <p>Providing innovative technology solutions to businesses worldwide.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services-details.html">Web Development</a></li>
+          <li><a href="/services-details.html">Mobile Development</a></li>
+          <li><a href="/services-details.html">Cloud Services</a></li>
+          <li><a href="/services-details.html">IT Consulting</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</li>
+          <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          <li><i class="fas fa-envelope"></i> info@technoit.com</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2023 TechnoIT. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    easing: 'ease',
+    once: true
+  });
+  
+  // Portfolio Filtering
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filter = this.getAttribute('data-filter');
+        
+        // Filter portfolio items
+        portfolioItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
