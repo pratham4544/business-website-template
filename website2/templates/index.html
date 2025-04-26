@@ -12,15 +12,19 @@
 
 <header>
   <div class="container">
-    <div class="logo">TechnoIT</div>
+    <div class="logo">
+      <a href="/index.html">
+        <img src="/assets/images/logo.png" alt="TechnoIT Logo" height="40">
+      </a>
+    </div>
     <nav>
       <ul>
         <li><a href="/index.html" class="active">Home</a></li>
         <li><a href="/about.html">About</a></li>
         <li><a href="/services.html">Services</a></li>
         <li><a href="/portfolio.html">Portfolio</a></li>
-        <li><a href="team.html">Team</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="/team.html">Team</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
@@ -38,11 +42,11 @@
       <p>Empowering businesses with cutting-edge technology solutions that drive growth and innovation.</p>
       <div class="hero-buttons">
         <a href="/contact.html" class="btn btn-primary">Get Started</a>
-        <a href="/services.html" class="btn btn-outline">Our Services</a>
+        <a href="/services.html" class="btn btn-secondary">Our Services</a>
       </div>
     </div>
-    <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
-      <img src="/assets/images/placeholder.jpg" alt="IT Solutions" class="img-fluid">
+    <div class="hero-img" data-aos="fade-left" data-aos-delay="200">
+      <img src="assets/images/hero.jpg" alt="Hero Image">
     </div>
   </div>
 </section>
@@ -56,7 +60,7 @@
     </div>
     
     <div class="features-grid">
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="feature" data-aos="fade-up" data-aos-delay="100">
         <div class="icon">
           <i class="fas fa-laptop-code"></i>
         </div>
@@ -65,7 +69,7 @@
         <a href="/services-details.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
       
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="feature" data-aos="fade-up" data-aos-delay="200">
         <div class="icon">
           <i class="fas fa-mobile-alt"></i>
         </div>
@@ -74,7 +78,7 @@
         <a href="/services-details.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
       
-      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+      <div class="feature" data-aos="fade-up" data-aos-delay="300">
         <div class="icon">
           <i class="fas fa-database"></i>
         </div>
@@ -88,10 +92,10 @@
 
 <section class="about-preview">
   <div class="container">
-    <div class="about-image" data-aos="fade-right">
-      <img src="/assets/images/placeholder.jpg" alt="About Us" class="img-fluid">
+    <div class="about-image" data-aos="fade-left" data-aos-delay="200">
+      <img src="assets/images/about-img.jpg" alt="About Us" class="img-fluid">
     </div>
-    <div class="about-content" data-aos="fade-left">
+    <div class="about-content" data-aos="fade-right" data-aos-delay="100">
       <span class="subtitle">About Us</span>
       <h2>We're Leading Technology Solutions Provider</h2>
       <p>With over 10 years of experience, we've been delivering cutting-edge technology solutions to businesses worldwide, helping them transform and grow in the digital era.</p>
@@ -125,8 +129,8 @@
     </div>
     
     <div class="portfolio-grid">
-      <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
-        <img src="/assets/images/placeholder.jpg" alt="Project 1" class="img-fluid">
+      <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+        <img src="assets/images/portfolio-1.jpg" alt="Project 1" class="img-fluid">
         <div class="portfolio-overlay">
           <h3>E-Commerce Solution</h3>
           <p>Web Development</p>
@@ -134,8 +138,8 @@
         </div>
       </div>
       
-      <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
-        <img src="/assets/images/placeholder.jpg" alt="Project 2" class="img-fluid">
+      <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
+        <img src="assets/images/portfolio-2.jpg" alt="Project 2" class="img-fluid">
         <div class="portfolio-overlay">
           <h3>Banking App</h3>
           <p>Mobile Development</p>
@@ -143,8 +147,8 @@
         </div>
       </div>
       
-      <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
-        <img src="/assets/images/placeholder.jpg" alt="Project 3" class="img-fluid">
+      <div class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
+        <img src="assets/images/portfolio-3.jpg" alt="Project 3" class="img-fluid">
         <div class="portfolio-overlay">
           <h3>Cloud Migration</h3>
           <p>Cloud Services</p>
@@ -168,11 +172,13 @@
     </div>
     
     <div class="testimonials-slider" data-aos="fade-up">
-      <div class="testimonial-card">
+      <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
         <div class="quote"><i class="fas fa-quote-left"></i></div>
         <p>"TechnoIT has transformed our business with their innovative solutions. Their team is professional, responsive, and delivered beyond our expectations."</p>
         <div class="client-info">
-          <img src="/assets/images/placeholder.jpg" alt="Client" class="client-img">
+          <div class="testimonial-img">
+            <img src="assets/images/testimonial-1.jpg" alt="Testimonial 1" class="client-img">
+          </div>
           <div>
             <h4>John Smith</h4>
             <p>CEO, Tech Company</p>
@@ -180,11 +186,13 @@
         </div>
       </div>
       
-      <div class="testimonial-card">
+      <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
         <div class="quote"><i class="fas fa-quote-left"></i></div>
         <p>"Working with TechnoIT was a game-changer for our company. Their expertise in cloud services helped us scale our operations seamlessly."</p>
         <div class="client-info">
-          <img src="/assets/images/placeholder.jpg" alt="Client" class="client-img">
+          <div class="testimonial-img">
+            <img src="assets/images/testimonial-2.jpg" alt="Testimonial 2" class="client-img">
+          </div>
           <div>
             <h4>Sarah Johnson</h4>
             <p>CTO, Retail Solutions</p>
@@ -209,7 +217,11 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-col">
-        <div class="logo">TechnoIT</div>
+        <div class="logo">
+          <a href="/index.html">
+            <img src="/assets/images/logo.png" alt="TechnoIT Logo" height="40">
+          </a>
+        </div>
         <p>Providing innovative technology solutions to businesses worldwide.</p>
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -261,8 +273,10 @@
 <script>
   AOS.init({
     duration: 800,
-    easing: 'ease',
-    once: true
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false,
+    offset: 100
   });
 </script>
 </body>
